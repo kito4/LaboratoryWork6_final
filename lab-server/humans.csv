@@ -1,0 +1,4 @@
+name,X,Y,creationDate,hasToothpick,impactSpeed,soundtrackName,MinutesOfWaiting,weaponType,cool,carname,RealHero
+ivan,12.3,2,2011-12-03T10:15:30+01:00,true,2.1,sus,2.0,KNIFE,true,test1,true
+test,2.2,2,2022-08-27T09:01:01.287283900+03:00[Europe/Moscow],true,3.3,ss,3.33,RIFLE,true,ss,false
+testtt,2.3,3,2022-08-27T09:28:44.204732500+03:00[Europe/Moscow],true,3.3,susss,3.33,KNIFE,true,h,false

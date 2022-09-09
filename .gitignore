@@ -1,0 +1,11 @@
+/target/
+/lab-client/target/
+/lab-client/javadoc/
+/lab-common/target/
+/lab-server/target/
+*.iml
+.idea
+*.jar
+
+# Project exclude paths
+/out/
