@@ -40,7 +40,7 @@ public final class Client {
         System.out.println("введите help чтобы увидеть список допустимых команд.");
         clientChannel.configureBlocking(false);
         clientChannel.register(selector, SelectionKey.OP_WRITE);
-        
+
         UserInputHandler userInputHandler = new UserInputHandler();
         exit:
         while (true) {

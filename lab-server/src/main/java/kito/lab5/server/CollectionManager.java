@@ -5,6 +5,7 @@ import kito.lab5.common.entities.HumanBeing;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
 /**
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class CollectionManager {
 
-    private final TreeSet<HumanBeing> humanQueue = new TreeSet<>(); //change priorityqueue to treeset
+    private final ConcurrentSkipListSet<HumanBeing> humanQueue = new ConcurrentSkipListSet<>(); //change priorityqueue to treeset to concurrentSkipListSet
     private final LocalDate initializationDate;
 
     /**
