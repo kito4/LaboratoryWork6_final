@@ -20,6 +20,8 @@ public class HumanInfoInput {
     private final String realHero;
     private final String hasToothpick;
     private final String impactSpeed;
+    
+    private TextSender sender;
 
     private String soundtrackname;
 
@@ -42,11 +44,12 @@ public class HumanInfoInput {
      * Конструктор принимающий человека информацию о котором мы хотим изменить
      * @param newHumanToInput человек информацию о котором мы хотим изменить
      */
-    public HumanInfoInput(HumanBeing newHumanToInput, String[] args) {
+    public HumanInfoInput(HumanBeing newHumanToInput, String[] args, TextSender sender) {
         this.name = args[0];
         this.realHero = args[1];
         this.hasToothpick = args[2];
         this.impactSpeed = args[3];
+        this.sender = sender;
 
         this.MinutesOfWaiting = args[4];
         this.newHumanToInput = newHumanToInput;
@@ -62,7 +65,7 @@ public class HumanInfoInput {
     }
 
     private void inputX() throws NumberFormatException {
-        TextSender.sendText("Введите X(дробное число): ");
+        sender.sendText("Введите X(дробное число): ");
         String userInput = scanner.nextLine();
         try {
             newHumanToInput.getCoordinates().setX((float) StringToTypeConverter.toObject(float.class, userInput));
@@ -71,13 +74,13 @@ public class HumanInfoInput {
                 inputX();
             }
         } catch (NumberFormatException e) {
-            TextSender.sendError("Ошибка ввода числа X");
+            sender.sendError("Ошибка ввода числа X");
             inputX();
         }
     }
 
     private void inputY() throws NumberFormatException {
-        TextSender.sendText("Введите Y(целое): ");
+        sender.sendText("Введите Y(целое): ");
         String userInput = scanner.nextLine();
         try {
             @javax.validation.constraints.NotNull Integer y = (Integer) StringToTypeConverter.toObject(Integer.class, userInput);
@@ -87,7 +90,7 @@ public class HumanInfoInput {
                 inputY();
             }
         } catch (NumberFormatException e) {
-            TextSender.sendError("Ошибка ввода числа Y");
+            sender.sendError("Ошибка ввода числа Y");
             inputY();
         }
     }
@@ -127,8 +130,8 @@ public class HumanInfoInput {
     }
 
     private void inputWeaponType() {
-        TextSender.sendText("Введите тип оружия из предложенных вариантов или оставьте пустую строку, если оружия нет: ");
-        TextSender.sendText(Arrays.toString(WeaponType.values()));
+        sender.sendText("Введите тип оружия из предложенных вариантов или оставьте пустую строку, если оружия нет: ");
+        sender.sendText(Arrays.toString(WeaponType.values()));
         String userInput = scanner.nextLine();
         if ("".equals(userInput)) {
             newHumanToInput.setWeaponType(null);
@@ -136,7 +139,7 @@ public class HumanInfoInput {
             try {
                 newHumanToInput.setWeaponType((WeaponType) StringToTypeConverter.toObject(WeaponType.class, userInput));
             } catch (IllegalArgumentException e) {
-                TextSender.sendError("Ошибка ввода типа оружия");
+                sender.sendError("Ошибка ввода типа оружия");
                 inputWeaponType();
             }
         }
@@ -148,21 +151,21 @@ public class HumanInfoInput {
 
 
     private void inputCarCoolness() {
-        TextSender.sendText("Машина крутая?[y/n]: ");
+        sender.sendText("Машина крутая?[y/n]: ");
         String userInput = scanner.nextLine().toLowerCase();
         if ("y".equals(userInput)) {
             userInput = "true";
         } else if ("n".equals(userInput)) {
             userInput = "false";
         } else {
-            TextSender.sendError("Ошибка ввода крутости машины");
+            sender.sendError("Ошибка ввода крутости машины");
             inputCarCoolness();
         }
         newHumanToInput.getCar().setCool((Boolean) StringToTypeConverter.toObject(Boolean.class, userInput));
     }
 
     private void inputCar() {
-        TextSender.sendText("Есть ли у человека машина?[y/n]");
+        sender.sendText("Есть ли у человека машина?[y/n]");
         String userAnswer = scanner.nextLine();
         if ("y".equals(userAnswer)) {
             inputCarCoolness();
@@ -171,20 +174,20 @@ public class HumanInfoInput {
         } else if ("n".equals(userAnswer)) {
             newHumanToInput.setCar(null);
         } else {
-            TextSender.sendError("Ошибка ввода");
+            sender.sendError("Ошибка ввода");
             inputCar();
         }
     }
 
     private void inputCarName() {
-        TextSender.sendText("Введите название машины");
+        sender.sendText("Введите название машины");
         String userAnswer = scanner.nextLine();
         newHumanToInput.getCar().setCarname(userAnswer);
 
     }
 
     private void inputSoundtrackname() {
-        TextSender.sendText("Введите название музыки");
+        sender.sendText("Введите название музыки");
         String userAnswer = scanner.nextLine();
         if ("".equals(userAnswer)) {
             newHumanToInput.setSoundtrackName(null);

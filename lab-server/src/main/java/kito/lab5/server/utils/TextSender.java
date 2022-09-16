@@ -12,10 +12,14 @@ public class TextSender {
     public static final String ERROR_COLOR = "\u001B[31m"; //ANSI_RED
     public static final String ANSI_RESET = "\u001B[0m";
     public static PrintStream printStream = System.out;
-    public static ObjectOutputStream oos;       // TODO 0709 remove if useless
-    public static OutputStream os;
+    public ObjectOutputStream oos;       // TODO 0709 remove if useless
+    public OutputStream os;
 
-    public static void sendObjectNeeded(String[] args) {
+    public TextSender(OutputStream os) {
+        this.os = os;
+    }
+
+    public void sendObjectNeeded(String[] args) {
         try {
             Response response = new Response();
             response.setObjectNeeded(true);
@@ -29,7 +33,7 @@ public class TextSender {
     }
 
 
-    public static void sendText(String text) {
+    public void sendText(String text) {
         try {
             Response response = new Response();
             response.setMessage(text);
@@ -43,7 +47,7 @@ public class TextSender {
         }
     }
 
-    public static void sendError(String text) {
+    public void sendError(String text) {
         try {
             Response response = new Response();
             response.setMessage(text);
@@ -58,7 +62,7 @@ public class TextSender {
         }
     }
 
-    public static void sendMessage(String text) {
+    public void sendMessage(String text) {
         try {
             Response response = new Response();
             response.setMessage(text);
@@ -72,7 +76,7 @@ public class TextSender {
         }
     }
 
-    public static void changePrintStream(ObjectOutputStream newPrintStream) {
+    public void changePrintStream(ObjectOutputStream newPrintStream) {
         oos = newPrintStream;
     }
 }

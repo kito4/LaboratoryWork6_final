@@ -4,7 +4,7 @@ import kito.lab5.common.util.Response;
 import kito.lab5.server.Config;
 import kito.lab5.server.abstractions.AbstractCommand;
 import kito.lab5.server.user_command_line.ErrorMessage;
-import kito.lab5.server.user_command_line.HumanInfoInput;
+//import kito.lab5.server.user_command_line.HumanInfoInput;
 import kito.lab5.server.user_command_line.SuccessMessage;
 import kito.lab5.server.utils.TextSender;
 
@@ -23,7 +23,7 @@ public class Add extends AbstractCommand {
 //                HumanInfoInput humanInfoInput = new HumanInfoInput(args);
 //                humanInfoInput.inputHuman();
 
-                TextSender.sendObjectNeeded(args);
+//                TextSender.sendObjectNeeded(args);
 
 
 //                Config.getCollectionManager().addHuman(humanInfoInput.getNewHumanToInput());

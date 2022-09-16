@@ -19,19 +19,19 @@ public class CommandManager {
     }
 
     private void initMap() {
-        commands.put("add", new Add());
-        commands.put("clear", new Clear());
-        commands.put("info", new Info());
-        commands.put("print_descending", new PrintAscending());
-        commands.put("save", new Save(Config.getFilePath()));
-        commands.put("show", new Show());
-        commands.put("update", new Update());
-        commands.put("help", new Help());
-        commands.put("execute_script", new ExecuteScript());
-        commands.put("remove_by_id", new RemoveByID());
-        commands.put("history", new History());
-        commands.put("add_if_max",new add_if_max());
-        commands.put("add_if_min", new add_if_min());
+//        commands.put("add", new Add());
+//        commands.put("clear", new Clear());
+//        commands.put("info", new Info());
+//        commands.put("print_descending", new PrintAscending());
+//        commands.put("save", new Save(Config.getFilePath()));
+//        commands.put("show", new Show());
+//        commands.put("update", new Update());
+//        commands.put("help", new Help());
+//        commands.put("execute_script", new ExecuteScript());
+//        commands.put("remove_by_id", new RemoveByID());
+//        commands.put("history", new History());
+//        commands.put("add_if_max",new add_if_max());
+//        commands.put("add_if_min", new add_if_min());
 
     }
 

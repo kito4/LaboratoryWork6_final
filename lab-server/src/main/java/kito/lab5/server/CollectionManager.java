@@ -106,6 +106,10 @@ public class CollectionManager {
                 .collect(Collectors.joining("\n"));
     }
 
+    public ConcurrentSkipListSet<HumanBeing> getHumanQueue() {
+        return humanQueue;
+    }
+
     /**
      * Метод, позволяющий заполнить коллекцию при помощи массива HumanBeing
      * @param arrayOfPeople массив HumanBeing

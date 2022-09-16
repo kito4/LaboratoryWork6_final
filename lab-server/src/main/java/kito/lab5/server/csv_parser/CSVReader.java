@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -87,7 +89,8 @@ public class CSVReader extends AbstractFileReader {
 
                     } catch (Exception e) {
                         e.printStackTrace();
-                        TextSender.sendError("Ошибка при чтении файла");
+
+                        System.out.println("Ошибка при чтении файла");
                         System.exit(2);
                     }
                 } else {
@@ -116,7 +119,7 @@ public class CSVReader extends AbstractFileReader {
 
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                TextSender.sendError("Ошибка при чтении файла");
+                                System.out.println("Ошибка при чтении файла");
                                 System.exit(2);
                             }
                         }
@@ -128,6 +131,32 @@ public class CSVReader extends AbstractFileReader {
     }
 
     private void readStringsFromFile() {
+
+//        PreparedStatement statement = new PreparedStatement("SELECT * FROM studs");
+//        ResultSet table = statement.executeQuery();
+//        String anton = table.getString("x");
+//
+//        for () {
+//            HashMap<String, String> newHuman = new HashMap<>();
+//            newHuman.put(parameters[i],table.getString("name"));
+//            newHuman.put(parameters[i],table.getString("x"));
+//
+//            String[] humanInfo = peopleString.split(",", -1);
+//
+//            for (int j = 0; j < parameters.length; j++) {
+//                newHuman.put(parameters[j], humanInfo[j]);
+//            }
+//
+//            peopleInfo.add(newHuman);
+//        }
+
+
+
+                // name,x,y
+                // ..., ..., ...
+                // ..., ..., ...
+
+
         ArrayList<String> stringsFromFile = new ArrayList<>();
         while (scannerOfFile.hasNextLine()) {
             stringsFromFile.add(scannerOfFile.nextLine());

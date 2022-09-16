@@ -18,7 +18,7 @@ public class HumanValidator {
         Set<ConstraintViolation<HumanBeing>> validateResult = validator.validate(human);
         if (validateResult.size() > 0) {
             for (ConstraintViolation<HumanBeing> violation : validateResult) {
-                TextSender.sendError(violation.getPropertyPath() + " " + violation.getMessage());
+                System.out.println(violation.getPropertyPath() + " " + violation.getMessage());
             }
             return false;
         }
@@ -29,7 +29,7 @@ public class HumanValidator {
         Set<ConstraintViolation<T>> validateResult = validator.validateProperty(t, fieldName);
         if (validateResult.size() > 0) {
             for (ConstraintViolation<T> violation : validateResult) {
-                TextSender.sendError(violation.getPropertyPath() + " " + violation.getMessage());
+                System.out.println(violation.getPropertyPath() + " " + violation.getMessage());
             }
             return false;
         }

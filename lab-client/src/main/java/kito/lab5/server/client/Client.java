@@ -44,7 +44,7 @@ public final class Client {
         UserInputHandler userInputHandler = new UserInputHandler();
         exit:
         while (true) {
-            selector.select(2000);                      // TODO 0709 timeout added
+            selector.select(4000);                      // TODO 0709 timeout added
             System.out.println("timeout reached");                      // TODO 0709 added
             Set<SelectionKey> keys = selector.selectedKeys();
             System.out.println(keys);

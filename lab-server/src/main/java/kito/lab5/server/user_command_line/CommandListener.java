@@ -20,14 +20,16 @@ public class CommandListener {
 
     private boolean isRunning;
     private final InputStream commandsInputStream;                  // TODO 0709 REPLACED BY INPUTSTREAM
+    private TextSender sender;
 
     /**
      * Конструктор
      */
-    public CommandListener(InputStream inputStream) {                   // TODO 0709 REPLACED BY INPUTSTREAM
+    public CommandListener(InputStream inputStream, TextSender sender) {                   // TODO 0709 REPLACED BY INPUTSTREAM
 //        TextSender.printText("Добро пожаловать в интерактивный режим работы с коллекцией, " +
 //                "введите help, чтобы узнать информацию о доступных командах"); //   TODO edit 0709
         commandsInputStream = inputStream;
+        this.sender = sender;
     }
 
     /**
@@ -38,6 +40,7 @@ public class CommandListener {
         Scanner scanner = new Scanner(commandsInputStream);         // TODO ACTUALLY 0709 remove useless scanner
         while (isRunning) {
             try {
+
                 byte[] objectBytes = new byte[4096];
                 commandsInputStream.read(objectBytes);
 
@@ -53,7 +56,7 @@ public class CommandListener {
                 System.out.println(request);
                 if (request.getCommandNameAndArguments().equals("addfinal")) {
                     Config.getCollectionManager().addHuman(request.getHuman());
-                    TextSender.sendMessage("Человек успешно добавлен!");
+                    sender.sendMessage("Человек успешно добавлен!");
                 } else {
                     String line = request.getCommandNameAndArguments();
                     System.out.println(line);
@@ -61,10 +64,11 @@ public class CommandListener {
 //                    isRunning = false;
 //                    continue;
 //                }
+
                     String[] inputString = SmartSplitter.smartSplit(line).toArray(new String[0]);
                     String commandName = inputString[0].toLowerCase();
                     String[] commandArgs = Arrays.copyOfRange(inputString, 1, inputString.length);
-                    TextSender.sendMessage(((AbstractMessage) Config.getCommandManager().execute(commandName.toLowerCase(), commandArgs)).getMessage());
+                    sender.sendMessage(((AbstractMessage) Config.getCommandManager().execute(commandName.toLowerCase(), commandArgs)).getMessage());
                 }
             } catch (NoSuchElementException e) {
                 break;

@@ -4,6 +4,7 @@ import kito.lab5.server.abstractions.AbstractCommand;
 import kito.lab5.server.user_command_line.CommandListener;
 import kito.lab5.server.user_command_line.ErrorMessage;
 import kito.lab5.server.user_command_line.SuccessMessage;
+import kito.lab5.server.utils.TextSender;
 
 import java.io.*;
 
@@ -20,7 +21,7 @@ public class ExecuteScript extends AbstractCommand {
         if (args.length == getAMOUNT_OF_ARGS()) {
             String fileName = args[0];
             try {
-                commandListener = new CommandListener((ObjectInputStream) initializeFile(fileName));
+                commandListener = new CommandListener((ObjectInputStream) initializeFile(fileName), new TextSender(new ByteArrayOutputStream(1024)));
             } catch (IOException e) {
                 return e.getMessage();
             }
