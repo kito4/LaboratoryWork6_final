@@ -17,13 +17,13 @@ public class Add extends AbstractCommand {
     }
 
     @Override
-    public Object execute(String[] args) {
+    public Object execute(String[] args, TextSender sender) {
         if (args.length == getAMOUNT_OF_ARGS()) {
             try {
 //                HumanInfoInput humanInfoInput = new HumanInfoInput(args);
 //                humanInfoInput.inputHuman();
 
-//                TextSender.sendObjectNeeded(args);
+                sender.sendObjectNeeded(args);
 
 
 //                Config.getCollectionManager().addHuman(humanInfoInput.getNewHumanToInput());

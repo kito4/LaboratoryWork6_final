@@ -5,6 +5,7 @@ import kito.lab5.server.abstractions.AbstractCommand;
 import kito.lab5.server.csv_parser.CSVSaver;
 import kito.lab5.server.user_command_line.ErrorMessage;
 import kito.lab5.server.user_command_line.SuccessMessage;
+import kito.lab5.server.utils.TextSender;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class Save extends AbstractCommand {
     }
 
     @Override
-    public Object execute(String[] args) {
+    public Object execute(String[] args, TextSender sender) {
         if (args.length == getAMOUNT_OF_ARGS()) {
             try {
                 CSVSaver saver = new CSVSaver(this.filePath);

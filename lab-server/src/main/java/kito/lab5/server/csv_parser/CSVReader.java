@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -132,23 +134,24 @@ public class CSVReader extends AbstractFileReader {
 
     private void readStringsFromFile() {
 
-//        PreparedStatement statement = new PreparedStatement("SELECT * FROM studs");
-//        ResultSet table = statement.executeQuery();
-//        String anton = table.getString("x");
-//
-//        for () {
-//            HashMap<String, String> newHuman = new HashMap<>();
-//            newHuman.put(parameters[i],table.getString("name"));
-//            newHuman.put(parameters[i],table.getString("x"));
-//
-//            String[] humanInfo = peopleString.split(",", -1);
-//
-//            for (int j = 0; j < parameters.length; j++) {
-//                newHuman.put(parameters[j], humanInfo[j]);
-//            }
-//
-//            peopleInfo.add(newHuman);
-//        }
+        Connection conn = DriverManager.getConnection("studs.mkd")
+        PreparedStatement statement = conn.prepareStatement("SELECT * FROM studs");
+        ResultSet table = statement.executeQuery();
+        String anton = table.getString("x");
+
+        for () {
+            HashMap<String, String> newHuman = new HashMap<>();
+            newHuman.put(parameters[i],table.getString("name"));
+            newHuman.put(parameters[i],table.getString("x"));
+
+            String[] humanInfo = peopleString.split(",", -1);
+
+            for (int j = 0; j < parameters.length; j++) {
+                newHuman.put(parameters[j], humanInfo[j]);
+            }
+
+            peopleInfo.add(newHuman);
+        }
 
 
 

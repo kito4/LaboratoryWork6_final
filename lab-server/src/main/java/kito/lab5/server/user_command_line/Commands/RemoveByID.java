@@ -4,6 +4,7 @@ import kito.lab5.server.Config;
 import kito.lab5.server.abstractions.AbstractCommand;
 import kito.lab5.server.user_command_line.ErrorMessage;
 import kito.lab5.server.user_command_line.SuccessMessage;
+import kito.lab5.server.utils.TextSender;
 
 public class RemoveByID extends AbstractCommand {
 
@@ -11,7 +12,7 @@ public class RemoveByID extends AbstractCommand {
         super("remove_by_id", "Удалить человека из коллекции по его ID, принимает на вход [ID]", 1);
     }
     @Override
-    public Object execute(String[] args) {
+    public Object execute(String[] args, TextSender sender) {
         if (args.length == getAMOUNT_OF_ARGS()) {
             try {
                 int id = Integer.parseInt(args[0]);

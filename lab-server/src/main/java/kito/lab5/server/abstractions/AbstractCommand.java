@@ -1,6 +1,8 @@
 package kito.lab5.server.abstractions;
 
 
+import kito.lab5.server.utils.TextSender;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +36,5 @@ public abstract class AbstractCommand {
         return name + ": " + description;
     }
 
-    public abstract Object execute(String[] args);
+    public abstract Object execute(String[] args, TextSender sender);
 }

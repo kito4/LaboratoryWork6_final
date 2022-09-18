@@ -5,6 +5,7 @@ import kito.lab5.server.abstractions.AbstractCommand;
 import kito.lab5.common.entities.HumanBeing;
 import kito.lab5.server.user_command_line.ErrorMessage;
 import kito.lab5.server.user_command_line.SuccessMessage;
+import kito.lab5.server.utils.TextSender;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class PrintAscending extends AbstractCommand {
     }
 
     @Override
-    public Object execute(String[] args) {
+    public Object execute(String[] args, TextSender sender) {
         if (args.length == getAMOUNT_OF_ARGS()) {
             List<HumanBeing> listToReturn = Config.getCollectionManager().returnDescending()    ;
             return new SuccessMessage(listToReturn.stream()

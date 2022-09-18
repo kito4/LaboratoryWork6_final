@@ -17,7 +17,7 @@ public class ExecuteScript extends AbstractCommand {
     }
 
     @Override
-    public Object execute(String[] args) {
+    public Object execute(String[] args, TextSender sender) {
         if (args.length == getAMOUNT_OF_ARGS()) {
             String fileName = args[0];
             try {

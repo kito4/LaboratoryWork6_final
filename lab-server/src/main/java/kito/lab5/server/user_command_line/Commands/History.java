@@ -5,6 +5,7 @@ import kito.lab5.server.Config;
 import kito.lab5.server.abstractions.AbstractCommand;
 import kito.lab5.server.user_command_line.ErrorMessage;
 import kito.lab5.server.user_command_line.SuccessMessage;
+import kito.lab5.server.utils.TextSender;
 
 import java.util.ArrayDeque;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class History extends AbstractCommand {
     }
 
     @Override
-    public Object execute(String[] args) {
+    public Object execute(String[] args, TextSender sender) {
         if (args.length == getAMOUNT_OF_ARGS()) {
             ArrayDeque<AbstractCommand> listToReturn = Config.getCommandManager().getLastExecutedCommands();
             return new SuccessMessage(listToReturn.stream()

@@ -27,7 +27,7 @@ public class ConnectionManager {
 
         new Thread(()->{
             app = new Application(is,sender);
-        });
+        }).start();
     }
 
 

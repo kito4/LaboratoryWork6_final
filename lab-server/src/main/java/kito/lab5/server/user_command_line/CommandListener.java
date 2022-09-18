@@ -68,7 +68,7 @@ public class CommandListener {
                     String[] inputString = SmartSplitter.smartSplit(line).toArray(new String[0]);
                     String commandName = inputString[0].toLowerCase();
                     String[] commandArgs = Arrays.copyOfRange(inputString, 1, inputString.length);
-                    sender.sendMessage(((AbstractMessage) Config.getCommandManager().execute(commandName.toLowerCase(), commandArgs)).getMessage());
+                    sender.sendMessage(((AbstractMessage) Config.getCommandManager().execute(commandName.toLowerCase(), commandArgs, sender)).getMessage());
                 }
             } catch (NoSuchElementException e) {
                 break;

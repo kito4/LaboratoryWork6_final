@@ -5,6 +5,7 @@ import kito.lab5.server.abstractions.AbstractCommand;
 import kito.lab5.server.user_command_line.ErrorMessage;
 import kito.lab5.server.user_command_line.HumanInfoInput;
 import kito.lab5.server.user_command_line.SuccessMessage;
+import kito.lab5.server.utils.TextSender;
 
 import java.util.Arrays;
 
@@ -15,13 +16,15 @@ public class Update extends AbstractCommand {
     }
 
     @Override
-    public Object execute(String[] args) {
+    public Object execute(String[] args, TextSender sender) {
         if (args.length == getAMOUNT_OF_ARGS()) {
             try {
                 int id = Integer.parseInt(args[0]);
-                HumanInfoInput humanInfoInput = new HumanInfoInput(Config.getCollectionManager().getHumanById(id), Arrays.copyOfRange(args, 1, args.length));
-                humanInfoInput.inputHuman();
-                Config.getCollectionManager().setHumanById(id, humanInfoInput.getNewHumanToInput());
+//                HumanInfoInput humanInfoInput = new HumanInfoInput(Config.getCollectionManager().getHumanById(id), Arrays.copyOfRange(args, 1, args.length));
+//                humanInfoInput.inputHuman();
+//
+//
+//                Config.getCollectionManager().setHumanById(id, humanInfoInput.getNewHumanToInput());
                 return new SuccessMessage("Объект успешно добавлен в коллекцию");
             } catch (IllegalArgumentException e) {
                 return new ErrorMessage(e.getMessage());

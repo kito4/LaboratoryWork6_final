@@ -5,6 +5,7 @@ import kito.lab5.server.abstractions.AbstractCommand;
 import kito.lab5.server.user_command_line.ErrorMessage;
 import kito.lab5.server.user_command_line.HumanInfoInput;
 import kito.lab5.server.user_command_line.SuccessMessage;
+import kito.lab5.server.utils.TextSender;
 
 public class AddIfMin extends AbstractCommand {
 
@@ -13,7 +14,7 @@ public class AddIfMin extends AbstractCommand {
     }
 
     @Override
-    public Object execute(String[] args) {
+    public Object execute(String[] args, TextSender sender) {
         if (args.length == getAMOUNT_OF_ARGS()) {
             try {
                 HumanInfoInput humanInfoInput = new HumanInfoInput(args);

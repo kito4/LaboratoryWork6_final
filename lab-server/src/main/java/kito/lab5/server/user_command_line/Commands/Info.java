@@ -4,6 +4,7 @@ import kito.lab5.server.Config;
 import kito.lab5.server.abstractions.AbstractCommand;
 import kito.lab5.server.user_command_line.ErrorMessage;
 import kito.lab5.server.user_command_line.SuccessMessage;
+import kito.lab5.server.utils.TextSender;
 
 public class Info extends AbstractCommand {
 
@@ -13,7 +14,7 @@ public class Info extends AbstractCommand {
     }
 
     @Override
-    public Object execute(String[] args) {
+    public Object execute(String[] args, TextSender sender) {
         if (args.length == getAMOUNT_OF_ARGS()) {
             return new SuccessMessage(Config.getCollectionManager().getInfoAboutCollection());
         } else {
