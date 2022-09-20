@@ -32,6 +32,20 @@ public class TextSender {
         }
     }
 
+    public void sendObjectNeeded(String[] args, boolean isUpdate) {
+        try {
+            Response response = new Response();
+            response.setObjectNeeded(true);
+            response.setUpdate();
+            response.setArgs(args);
+
+            ByteBuffer buffer = Serializer.serializeResponse(response);
+            os.write(buffer.array());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void sendText(String text) {
         try {

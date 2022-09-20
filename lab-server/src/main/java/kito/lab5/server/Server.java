@@ -34,7 +34,7 @@ public final class Server {
 //            Socket s= ss.accept();
 
             while (true) {
-                new ConnectionManager(ss.accept());
+                new ConnectionManager(ss.accept(), collectionFileReader);
             }
 
 //            TextSender.os = os;     // TODO 0709 added

@@ -22,7 +22,9 @@ public class Update extends AbstractCommand {
                 int id = Integer.parseInt(args[0]);
 //                HumanInfoInput humanInfoInput = new HumanInfoInput(Config.getCollectionManager().getHumanById(id), Arrays.copyOfRange(args, 1, args.length));
 //                humanInfoInput.inputHuman();
-//
+
+
+                sender.sendObjectNeeded(args, true);
 //
 //                Config.getCollectionManager().setHumanById(id, humanInfoInput.getNewHumanToInput());
                 return new SuccessMessage("Объект успешно добавлен в коллекцию");

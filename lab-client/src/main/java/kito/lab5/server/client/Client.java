@@ -67,7 +67,7 @@ public final class Client {
                     System.out.println(Arrays.toString(buffer.array()));            // TODO UNDO IMPORT
                     Response response = Serializer.deSerializeResponse(buffer.array());
                     ResponseHandler.handleResponse(response);
-                    if (response.isObjectNeeded()) {
+                    if (response.isObjectNeeded() && !response.isUpdate()) {
                         Request request = new Request();
                         request.setHuman(humanFactory.start(true, response.getArgs()));// Что нужно передать в объекте только строку или всю коллекцию(HumanBeing)?
                         request.setCommandNameAndArguments("addfinal");
@@ -80,7 +80,20 @@ public final class Client {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    } else {
+                    } else if (response.isObjectNeeded() && response.isUpdate()) {
+                        Request request = new Request();
+                        request.setHuman(humanFactory.start(true, response.getArgs()));// Что нужно передать в объекте только строку или всю коллекцию(HumanBeing)?
+                        request.setCommandNameAndArguments("updatefinal");
+
+                        try {
+                            ByteBuffer bufferToSend = Serializer.serializeRequest(request);
+                            clientChannel.write(bufferToSend);
+                            bufferToSend.clear();
+                            clientChannel.register(selector, SelectionKey.OP_READ);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                } else {
                         clientChannel.register(selector, SelectionKey.OP_WRITE);
                     }
                 } else {                             //      if (key.isWritable()) {     // TODO 0709 REMOVED

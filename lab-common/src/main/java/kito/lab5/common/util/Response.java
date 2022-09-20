@@ -14,6 +14,7 @@ public class Response implements Serializable {
     ArrayList<HumanBeing> human = new ArrayList<>();
     ArrayList<String> strings = new ArrayList<>();
     private String[] args;
+    boolean isUpdate;
 
 
     public void setArgs(String[] args) {
@@ -30,6 +31,14 @@ public class Response implements Serializable {
 
     public boolean isObjectNeeded() {
         return isObjectNeeded;
+    }
+
+    public void setUpdate() {
+        isUpdate = true;
+    }
+
+    public boolean isUpdate() {
+        return isUpdate;
     }
 
     public void setObjectNeeded(boolean objectNeeded) {

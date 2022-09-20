@@ -10,10 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +22,9 @@ import java.util.Scanner;
 public class CSVReader extends AbstractFileReader {
 
     private Scanner scannerOfFile;
-    private String[] parameters;
+    private String[] parameters = {"id","name","X","Y","creationDate","hasToothpick","impactSpeed","soundtrackName",};
+
+    // id,name,X,Y,creationDate,hasToothpick,impactSpeed,soundtrackName,MinutesOfWaiting,weaponType,cool,carname,RealHero,creator
     private final ArrayList<String> peopleStrings = new ArrayList<>();
     private final ArrayList<HashMap<String, String>> peopleInfo = new ArrayList<>();
     private final ArrayList<HumanBeing> humanArray = new ArrayList<>();
@@ -51,7 +50,8 @@ public class CSVReader extends AbstractFileReader {
      */
     @Override
     public void parseFile() {
-        readPeople();
+//        readPeople();
+        readStringsFromTable();
         for (HashMap<String, String> humanInfo : peopleInfo) {
             HumanBeing newHuman = createHuman(humanInfo);
 //            if (HumanValidator.validateHuman(newHuman)) {     // TODO HumanValidator
@@ -132,53 +132,77 @@ public class CSVReader extends AbstractFileReader {
         return newHuman;
     }
 
-    private void readStringsFromFile() {
+    private void readStringsFromTable() {
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://pg:5432/studs");
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM s334582;");
+            ResultSet table = statement.executeQuery();
 
-        Connection conn = DriverManager.getConnection("studs.mkd")
-        PreparedStatement statement = conn.prepareStatement("SELECT * FROM studs");
-        ResultSet table = statement.executeQuery();
-        String anton = table.getString("x");
+            HashMap<String, String> newHuman;
 
-        for () {
-            HashMap<String, String> newHuman = new HashMap<>();
-            newHuman.put(parameters[i],table.getString("name"));
-            newHuman.put(parameters[i],table.getString("x"));
+            peopleInfo.clear();
+            do {
+                newHuman = new HashMap<>();
+                newHuman.put("name", table.getString("name"));
+                newHuman.put("x", table.getString("x"));
+                newHuman.put("y", table.getString("y"));
+                newHuman.put("creationDate", table.getString("creationDate"));
+                newHuman.put("hasToothpick", table.getString("hasToothpick"));
+                newHuman.put("impactSpeed", table.getString("impactSpeed"));
+                newHuman.put("soundtrackName", table.getString("soundtrackName"));
+                newHuman.put("minutesOfWaiting", table.getString("minutesOfWaiting"));
+                newHuman.put("weaponType", table.getString("weaponType"));
+                newHuman.put("cool", table.getString("cool"));
+                newHuman.put("carName", table.getString("carName"));
+                newHuman.put("realHero", table.getString("realHero"));
+                newHuman.put("creator", table.getString("creator"));
 
-            String[] humanInfo = peopleString.split(",", -1);
+//            String[] humanInfo = peopleString.split(",", -1);     // TODO 1509 deprecated
+//
+//            for (int j = 0; j < parameters.length; j++) {
+//                newHuman.put(parameters[j], humanInfo[j]);
+//            }
 
-            for (int j = 0; j < parameters.length; j++) {
-                newHuman.put(parameters[j], humanInfo[j]);
-            }
+                peopleInfo.add(newHuman);
+            } while (table.next());
 
-            peopleInfo.add(newHuman);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
 
+        // name - Anton
+        // hasCar - false
+        // cool - true
 
-                // name,x,y
+
+                // id,name,X,Y,creationDate,hasToothpick,impactSpeed,soundtrackName,MinutesOfWaiting,weaponType,cool,carname,RealHero,creator
                 // ..., ..., ...
                 // ..., ..., ...
 
 
-        ArrayList<String> stringsFromFile = new ArrayList<>();
-        while (scannerOfFile.hasNextLine()) {
-            stringsFromFile.add(scannerOfFile.nextLine());
-        }
-        parameters = stringsFromFile.get(0).split(",");
-        for (int i = 1; i < stringsFromFile.size(); i++) {
-            peopleStrings.add(stringsFromFile.get(i));
-        }
+//        ArrayList<String> stringsFromFile = new ArrayList<>();
+//        while (scannerOfFile.hasNextLine()) {
+//            stringsFromFile.add(scannerOfFile.nextLine());
+//        }
+//        parameters = stringsFromFile.get(0).split(",");
+//        for (int i = 1; i < stringsFromFile.size(); i++) {
+//            peopleStrings.add(stringsFromFile.get(i));
+//        }
     }
 
-    private void readPeople() {
-        readStringsFromFile();
-        for (String peopleString : peopleStrings) {
-            HashMap<String, String> newHuman = new HashMap<>();
-            String[] humanInfo = peopleString.split(",", -1);
-            for (int j = 0; j < parameters.length; j++) {
-                newHuman.put(parameters[j], humanInfo[j]);
-            }
-            peopleInfo.add(newHuman);
-        }
-    }
+//    private void readPeople() {
+//        readStringsFromFile();
+//        for (String peopleString : peopleStrings) {
+//            HashMap<String, String> newHuman = new HashMap<>();
+//            String[] humanInfo = peopleString.split(",", -1);
+//            for (int j = 0; j < parameters.length; j++) {
+//                newHuman.put(parameters[j], humanInfo[j]);
+//            }
+//            peopleInfo.add(newHuman);
+//        }
+//    }
 }

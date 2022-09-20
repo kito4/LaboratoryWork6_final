@@ -1,5 +1,6 @@
 package kito.lab5.server;
 
+import kito.lab5.server.csv_parser.CSVReader;
 import kito.lab5.server.utils.TextSender;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class ConnectionManager {
     private Application app;
     private TextSender sender;
 
-    public ConnectionManager(Socket s) {
+    public ConnectionManager(Socket s, CSVReader reader) {
         this.s = s;
         try {
             is = s.getInputStream();
@@ -26,7 +27,7 @@ public class ConnectionManager {
         }
 
         new Thread(()->{
-            app = new Application(is,sender);
+            app = new Application(is,sender, reader);
         }).start();
     }
 

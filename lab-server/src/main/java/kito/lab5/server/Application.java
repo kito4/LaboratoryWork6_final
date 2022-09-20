@@ -12,9 +12,9 @@ public class Application {
 
     CommandListener commandListener;
 
-    public Application(InputStream dis, TextSender sender) {               // TODO 0709 changed to inputstream
+    public Application(InputStream dis, TextSender sender, CSVReader reader) {               // TODO 0709 changed to inputstream
         commandListener = new CommandListener(dis, sender);
-        commandListener.readCommands();
+        commandListener.readCommands(reader);
     }
 
 }
